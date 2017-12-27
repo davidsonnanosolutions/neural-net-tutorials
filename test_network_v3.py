@@ -24,6 +24,6 @@ test = zip(ev_k,max_acc)
 """
 
 
-test = (net.SGD(training_data, 1, 10, 0.5, evaluation_data=validation_data, monitor_evaluation_accuracy=True))
+test = (net.SGD(training_data, 30, 10, 0.5, evaluation_data=validation_data, monitor_evaluation_accuracy=True, monitor_training_cost=True))
 #print test[1]
 
