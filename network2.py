@@ -163,9 +163,11 @@ class Network(object):
         for j in xrange(epochs):
             random.shuffle(training_data)
             mini_batches = [training_data[k:k+mini_batch_size] for k in xrange(0, n, mini_batch_size)]
+
             for mini_batch in mini_batches:
                 self.update_mini_batch(mini_batch, eta, lmbda, len(training_data))
             print "Epoch %s training complete" % j
+
             if monitor_training_cost:
                 cost = self.total_cost(training_data, lmbda)
                 training_cost.append(cost)
@@ -279,12 +281,17 @@ class Network(object):
         reversed) convention for the ``accuracy`` method, above.
         """
         cost = 0.0
+
         for x, y in data:
+            
             a = self.feedforward(x)
+
             if convert: y = vectorized_result(y)
+
             cost += self.cost.fn(a, y)/len(data)
-        cost += 0.5*(lmbda/len(data))*sum(
-            np.linalg.norm(w)**2 for w in self.weights)
+
+        cost += 0.5*(lmbda/len(data))*sum(np.linalg.norm(w)**2 for w in self.weights)
+
         return cost
 
     def save(self, filename):
